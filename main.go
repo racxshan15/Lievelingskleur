@@ -23,6 +23,14 @@ func code(kleur string) {
 		tekst = "Groen van de natuur."
 	case "geel":
 		tekst = "Geel als de stralen van de zon."
+	case "paars":
+		tekst = "Paars als de nacht."
+	case "oranje":
+		tekst = "Oranje als de zonsondergang."
+	case "wit":
+		tekst = "Wit als de sneeuw."
+	case "roze":
+		tekst = "Roze als de bloesem."
 	default: //Dit gebeurt er als je iets intypt wat niet bij de case hoort.
 		fmt.Println("Sorry, ik ken deze kleur niet.")
 		os.Exit(1) //Foutmelding.
