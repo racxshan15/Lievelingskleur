@@ -9,7 +9,11 @@ func main() {
 	var kleur string
 	fmt.Println("Wat is je favoriete kleur? ")
 	fmt.Scanln(&kleur) //Hier wordt gescant wat je in de terminal typt. Wat je in de terminal typt wordt gezien als 'kleur'.
-	zin := getSentence(kleur)
+	zin, fout := getSentence(kleur)
+	if fout != nil {
+		fmt.Println("Er is een fout opgetreden:", fout)
+	}
+
 	err := writeToFile(zin)
 	if err != nil {
 		fmt.Println("couldn't write to file", err)
@@ -17,7 +21,7 @@ func main() {
 	}
 }
 
-func getSentence(kleur string) string {
+func getSentence(kleur string) (string, error) {
 	var tekst string //String voor de tekst wat in de textfile komt.
 	switch kleur {   //Een switch statement voor de verschillende mogelijkheden.
 	case "rood":
@@ -39,9 +43,9 @@ func getSentence(kleur string) string {
 	default: //Dit gebeurt er als je iets intypt wat niet bij de case hoort.
 		//fmt.Println("Sorry, ik ken deze kleur niet.")
 		//os.Exit(1) //Foutmelding.
-		tekst = ""
+		return "", fmt.Errorf("kleur %s is niet bekend", kleur) //%s is wat ik in de terminal invoer.
 	}
-	return tekst
+	return tekst, nil
 }
 
 func writeToFile(sentence string) error {
